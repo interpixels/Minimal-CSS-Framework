@@ -1,0 +1,159 @@
+/* ==========================================================================
+   MINIMAL CSS FRAMEWORK — COMPONENTS (examples)
+   These are reference implementations, not required parts of the
+   framework — delete or replace freely per project. They exist to show
+   the BEM + token conventions in practice: block__element, block--modifier,
+   and every value pulled from tokens.css rather than hardcoded.
+   ========================================================================== */
+
+/* ---- Button --------------------------------------------------------------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3xs);
+    border: var(--border-width-m) solid transparent;
+    border-radius: var(--radius-s);
+    padding: var(--space-2xs) var(--space-s);
+    font-size: var(--text-s);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-tight);
+    text-decoration: none;
+    background: var(--color-primary);
+    color: var(--color-primary-contrast);
+    transition: background var(--duration-base) var(--ease-standard),
+                transform var(--duration-fast) var(--ease-out);
+}
+
+.btn:hover {
+    background: var(--p1-c2);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Disabled via the native attribute, not just a class, so it's actually
+   inert for keyboard and assistive tech — don't style-disable a <button>
+   with only a class, use [disabled] or aria-disabled. */
+.btn:disabled,
+.btn[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn--secondary {
+    background: transparent;
+    border-color: var(--color-border);
+    color: var(--color-text);
+}
+
+.btn--secondary:hover {
+    background: var(--color-bg-subtle);
+}
+
+.btn--ghost {
+    background: transparent;
+    color: var(--color-primary);
+}
+
+.btn--ghost:hover {
+    background: var(--p1-c8);
+}
+
+.btn--danger {
+    background: var(--color-danger);
+}
+
+.btn--s { padding: var(--space-3xs) var(--space-2xs); font-size: var(--text-xs); }
+.btn--l { padding: var(--space-xs) var(--space-l); font-size: var(--text-m); }
+
+/* ---- Card ------------------------------------------------------------------ */
+.card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+    border: var(--border-width-s) solid var(--color-border);
+    border-radius: var(--radius-m);
+    box-shadow: var(--shadow-s);
+    overflow: hidden;
+}
+
+.card__media {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.card__body {
+    padding: var(--space-s);
+}
+
+.card__title {
+    font-size: var(--text-l);
+    font-weight: var(--fw-semibold);
+    margin-block-end: var(--space-3xs);
+}
+
+.card__text {
+    color: var(--color-text-muted);
+}
+
+/* Force a card to dark regardless of the page theme — demonstrates the
+   .theme-always-dark hook from tokens.css. Useful for e.g. a "featured"
+   card that should always read as a dark panel. */
+.card--always-dark {
+    /* apply alongside .theme-always-dark in markup, e.g.:
+       <div class="card card--always-dark theme-always-dark"> */
+}
+
+/* ---- Badge ------------------------------------------------------------------ */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-4xs) var(--space-2xs);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: var(--fw-medium);
+    background: var(--color-bg-subtle);
+    color: var(--color-text);
+}
+
+.badge--success { background: var(--color-success); color: var(--n1-c10); }
+.badge--warning { background: var(--color-warning); color: var(--n1-c10); }
+.badge--danger  { background: var(--color-danger);  color: var(--n1-c10); }
+.badge--info    { background: var(--color-info);    color: var(--n1-c10); }
+
+/* ---- Form field -------------------------------------------------------------- */
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4xs);
+}
+
+.field__label {
+    font-size: var(--text-s);
+    font-weight: var(--fw-medium);
+}
+
+.field__input {
+    padding: var(--space-2xs);
+    border: var(--border-width-s) solid var(--color-border);
+    border-radius: var(--radius-xs);
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+.field__hint {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+}
+
+/* Pair with aria-invalid="true" on the input, not just a visual class,
+   so screen readers announce the invalid state too. */
+.field--invalid .field__input {
+    border-color: var(--color-danger);
+}
+
+.field--invalid .field__hint {
+    color: var(--color-danger);
+}

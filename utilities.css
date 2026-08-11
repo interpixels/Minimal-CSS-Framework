@@ -1,0 +1,75 @@
+/* ==========================================================================
+   MINIMAL CSS FRAMEWORK — UTILITIES
+   If you're using a visual page builder, its own panel likely already
+   covers most spacing/layout/typography needs, so this file stays small
+   on purpose — utility-class sprawl fighting a visual builder is worse
+   than no utilities at all. What's here is either (a) hard to do reliably
+   through a panel (vertical rhythm across dynamic/looped content) or
+   (b) a named layout primitive that saves rebuilding the same flex recipe
+   on every element.
+   ========================================================================== */
+
+/* ---- Container ------------------------------------------------------------
+   Works alongside a builder's own wide + full alignment controls (e.g.
+   WordPress's alignwide/alignfull); this is for the "normal" content width. */
+.container {
+    width: min(100% - (var(--space-m) * 2), var(--container-l));
+    margin-inline: auto;
+}
+
+.container--s  { max-width: var(--container-s); }
+.container--m  { max-width: var(--container-m); }
+.container--xl { max-width: var(--container-xl); }
+
+/* ---- Flow -------------------------------------------------------------
+   "Every Layout" vertical-rhythm pattern: puts consistent space between
+   sibling elements without needing margin on every block individually.
+   Handy inside dynamic content (query loops, RTE output) where you can't
+   set per-block spacing in the panel. Override --flow-space per-instance
+   to change the rhythm. */
+.flow > * + * {
+    margin-block-start: var(--flow-space, var(--space-m));
+}
+
+/* ---- Layout primitives -------------------------------------------------- */
+.u-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--stack-gap, var(--space-m));
+}
+
+.u-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--cluster-gap, var(--space-2xs));
+}
+
+/* ---- Aspect ratio -------------------------------------------------------- */
+.u-aspect-video  { aspect-ratio: 16 / 9; }
+.u-aspect-square { aspect-ratio: 1 / 1; }
+
+.u-aspect-video,
+.u-aspect-square {
+    overflow: hidden;
+}
+
+.u-aspect-video > img,
+.u-aspect-video > video,
+.u-aspect-square > img,
+.u-aspect-square > video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ---- Text ----------------------------------------------------------------- */
+.u-text-muted { color: var(--color-text-muted); }
+.u-text-balance { text-wrap: balance; }
+
+/* ---- Vertical spacing on dynamic content (see .flow note above) --------- */
+.u-mt-xs { margin-block-start: var(--space-xs); }
+.u-mt-s  { margin-block-start: var(--space-s); }
+.u-mt-m  { margin-block-start: var(--space-m); }
+.u-mt-l  { margin-block-start: var(--space-l); }
+.u-mt-xl { margin-block-start: var(--space-xl); }
